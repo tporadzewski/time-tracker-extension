@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "scripts": {
+    "local": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --env=local --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "staging": "cross-env NODE_ENV=staging node_modules/webpack/bin/webpack.js --progress --env=staging --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --env=production --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "dev": "yarn run local",
+    "prod": "yarn run production",
+    "watch": "yarn run local --watch"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.0.11",
+    "@vue/eslint-config-standard": "^5.1.2",
+    "cross-env": "^7.0.3",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^7.0.0",
+    "laravel-mix": "^6.0.11",
+    "postcss": "^8.2.4",
+    "sass": "^1.32.5",
+    "sass-loader": "^11.0.1",
+    "vue": "^3.0.11",
+    "vue-loader": "^16.1.0",
+    "webpack": "^5.35.0"
+  }
+}
