@@ -1,18 +1,22 @@
 <template>
-  <div part="container">
+  <div part="app">
     {{ formattedHours }}:{{ formattedMinutes }}:{{ formattedSeconds }}
-    <button
-      part="timer-button"
-      @click="handleToggleTimerClick()"
-    >{{buttonLabel}}</button>
+    <BaseButton color="secondary" @click="handleToggleTimerClick()">
+      {{ timerButtonLabel }}
+    </BaseButton>
+    <BaseButton @click="handleCloseExtensionClick()">{{ closeLabel }}</BaseButton>
   </div>
 </template>
 <script>
 import { computed, ref } from 'vue'
+import BaseButton from './components/BaseButton'
+import { APP_ID } from './constants'
 
 const formatTime = time => (String(time).length === 1 ? `0${time}` : time)
 export default {
-  setup () {
+  name: 'App',
+  components: { BaseButton },
+  setup (props, context) {
     const counter = ref(null)
 
     const seconds = ref(0)
@@ -21,10 +25,6 @@ export default {
     const formattedSeconds = computed(() => formatTime(seconds.value))
     const formattedMinutes = computed(() => formatTime(minutes.value))
     const formattedHours = computed(() => formatTime(hours.value))
-    const isTimerActive = computed(() => typeof counter.value === 'number')
-    const buttonLabel = computed(() =>
-      isTimerActive.value ? 'Stop' : 'Play'
-    )
 
     const initCounter = () => {
       counter.value = setInterval(() => {
@@ -44,6 +44,9 @@ export default {
       counter.value = clearInterval(counter.value)
     }
 
+    const isTimerActive = computed(() => typeof counter.value === 'number')
+    const timerButtonLabel = computed(() => (isTimerActive.value ? 'Stop' : 'Resume'))
+
     const handleToggleTimerClick = () => {
       if (isTimerActive.value) {
         stopCounter()
@@ -52,59 +55,51 @@ export default {
       }
     }
 
+    const closeLabel = 'Close'
+    const handleCloseExtensionClick = () => {
+      const appContainer = document.querySelector(`#${APP_ID}`)
+
+      appContainer.remove()
+      window.removeEventListener('blur', () => stopCounter())
+      window.removeEventListener('focus', () => initCounter())
+    }
+
     window.addEventListener('blur', () => stopCounter())
     window.addEventListener('focus', () => initCounter())
 
     initCounter()
 
     return {
-      seconds,
-      minutes,
-      hours,
       formattedSeconds,
       formattedMinutes,
       formattedHours,
       handleToggleTimerClick,
-      buttonLabel,
-      counter
+      timerButtonLabel,
+      closeLabel,
+      handleCloseExtensionClick
     }
   }
 }
 </script>
 <style lang="scss">
-@import 'scss/variables.scss';
+@import "scss/variables.scss";
 
-#timer-chrome-extenstion-container {
-  &::part(container) {
-    background: linear-gradient(180deg, color('secondary') 0%, color('secondary', 'light') 100%);
+#{$app-selector} {
+  &::part(app) {
+    background: linear-gradient(
+      180deg,
+      color("primary") 0%,
+      color("primary", "light") 100%
+    );
     padding: 1em;
-    border-radius: 20px;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-family: $font-family;
     font-size: $font-size-lg;
-  }
-
-  &::part(timer-button) {
-    display: inline-block;
-    padding: 16px 48px;
-    margin-top: 1em;
-    border-radius: 8px;
-    cursor: pointer;
-    border: none;
-    outline: 0;
-    transition: 0.1s ease;
-    font-family: $font-family;
-    font-size: $font-size;
-    font-weight: $font-bold;
-    background: color('primary');
-    color: color('light');
-
-    &:hover {
-      box-shadow: 0 4px 20px color('primary', 'light');
-    }
+    color: color("light");
   }
 }
 </style>

@@ -12,10 +12,10 @@ mix.webpackConfig({
 
 mix
   .setPublicPath('./')
-  .js('src/background.js', 'public')
-  .js('src/main.js', 'public')
+  .js('src/background.js', 'dist')
+  .js('src/main.js', 'dist')
   .vue()
-  .copy('src/assets/', 'public/assets')
+  .copy('src/assets/', 'dist/assets')
   .options({
     processCssUrls: false
   })

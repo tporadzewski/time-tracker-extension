@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-
-const APP_ID = 'timer-chrome-extenstion-container'
+import { APP_ID } from './constants'
 
 const createAppContainer = () => {
   const container = document.createElement('div')
