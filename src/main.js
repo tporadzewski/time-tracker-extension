@@ -7,6 +7,7 @@ const createAppContainer = () => {
   const container = document.createElement('div')
 
   container.id = APP_ID
+  container.style.all = 'initial'
   container.style.position = 'fixed'
   container.style.top = '40px'
   container.style.right = '40px'
