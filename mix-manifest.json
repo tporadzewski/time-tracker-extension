@@ -1,7 +1,7 @@
 {
-    "/public/background.js": "/public/background.js",
-    "/public/main.js": "/public/main.js",
-    "/public/assets/icon-clock-128x128.png": "/public/assets/icon-clock-128x128.png",
-    "/public/assets/icon-clock-16x16.png": "/public/assets/icon-clock-16x16.png",
-    "/public/assets/icon-clock-48x48.png": "/public/assets/icon-clock-48x48.png"
+    "/dist/background.js": "/dist/background.js",
+    "/dist/main.js": "/dist/main.js",
+    "/dist/assets/icon-clock-128x128.png": "/dist/assets/icon-clock-128x128.png",
+    "/dist/assets/icon-clock-16x16.png": "/dist/assets/icon-clock-16x16.png",
+    "/dist/assets/icon-clock-48x48.png": "/dist/assets/icon-clock-48x48.png"
 }
